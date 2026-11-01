@@ -16,4 +16,6 @@ public interface IAuditLogRepository
         int pageSize = 20,
         CancellationToken cancellationToken = default);
     Task<IReadOnlyList<AuditLog>> GetRecentActionsAsync(int count = 10, CancellationToken cancellationToken = default);
+    Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default);
+    Task<IReadOnlyList<AuditLog>> GetLogsSinceAsync(DateTime sinceUtc, CancellationToken cancellationToken = default);
 }

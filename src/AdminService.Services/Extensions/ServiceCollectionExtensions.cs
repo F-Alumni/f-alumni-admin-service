@@ -25,6 +25,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ISampleItemService, SampleItemService>();
         services.AddScoped<IAuditLogService, AuditLogService>();
         services.AddScoped<IUserModerationService, UserModerationService>();
+        services.AddScoped<IModerationReportService, ModerationReportService>();
+        services.AddScoped<ISystemAnnouncementService, SystemAnnouncementService>();
+        services.AddScoped<IDashboardService, DashboardService>();
+        services.AddScoped<IDataExportService, DataExportService>();
 
         return services;
     }

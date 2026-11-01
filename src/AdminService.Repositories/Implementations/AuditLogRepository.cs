@@ -84,4 +84,18 @@ public class AuditLogRepository : IAuditLogRepository
             .Take(count)
             .ToListAsync(cancellationToken);
     }
+
+    public async Task<int> GetTotalCountAsync(CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.AuditLogs.CountAsync(cancellationToken);
+    }
+
+    public async Task<IReadOnlyList<AuditLog>> GetLogsSinceAsync(DateTime sinceUtc, CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.AuditLogs
+            .AsNoTracking()
+            .Where(x => x.CreatedAtUtc >= sinceUtc)
+            .OrderBy(x => x.CreatedAtUtc)
+            .ToListAsync(cancellationToken);
+    }
 }
