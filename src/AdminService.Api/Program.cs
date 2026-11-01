@@ -1,6 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using AdminService.Api.Data;
 using AdminService.Api.Middlewares;
 using AdminService.Services.Extensions;
 
@@ -98,6 +99,9 @@ app.MapHealthChecks("/health");
 
 // Map API Controllers
 app.MapControllers();
+
+// 6. Seed administrative database with test fixtures
+await AdminDatabaseSeeder.SeedAsync(app.Services);
 
 app.Run();
 

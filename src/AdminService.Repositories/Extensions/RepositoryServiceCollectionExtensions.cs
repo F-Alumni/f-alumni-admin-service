@@ -38,6 +38,10 @@ public static class RepositoryServiceCollectionExtensions
         }
 
         services.AddScoped<ISampleItemRepository, SampleItemRepository>();
+        services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+        services.AddScoped<ISystemAnnouncementRepository, SystemAnnouncementRepository>();
+        services.AddScoped<IModerationReportRepository, ModerationReportRepository>();
+        services.AddScoped<ISystemSettingRepository, SystemSettingRepository>();
 
         return services;
     }
