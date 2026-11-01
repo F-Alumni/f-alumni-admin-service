@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AdminService.Repositories.Extensions;
+using AdminService.Services.HttpClients;
 using AdminService.Services.Implementations;
 using AdminService.Services.Interfaces;
 
@@ -17,8 +18,13 @@ public static class ServiceCollectionExtensions
         // 1. Register lower-level Repository layer dependencies
         services.AddRepositories(configuration);
 
-        // 2. Register Service layer dependencies
+        // 2. Register HTTP Clients for inter-service communication
+        services.AddHttpClient<IUserServiceClient, UserServiceClient>();
+
+        // 3. Register Service layer dependencies
         services.AddScoped<ISampleItemService, SampleItemService>();
+        services.AddScoped<IAuditLogService, AuditLogService>();
+        services.AddScoped<IUserModerationService, UserModerationService>();
 
         return services;
     }
